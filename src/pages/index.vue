@@ -76,7 +76,7 @@
               >
                 <v-card-title>{{ item.title }}</v-card-title>
                 <v-card-subtitle
-                  >{{ item.floor_num == 1 ? "主题帖" : `${item.floor_num}楼` }} 发布于{{
+                  >{{ item.floor_num == 1 ? "主题帖" : `${item.floor_num}` }} 发布于{{
                     item.created_at
                   }}
                   来自{{ item.nickname }}</v-card-subtitle
