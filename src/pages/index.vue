@@ -85,7 +85,7 @@
                 <v-card-actions class="justify-end">
                   <a
                     style="color: black"
-                    :href="`/post/?id=${item.post_id}`"
+                    :href="`#/post?id=${item.post_id}`"
                     target="_blank"
                   >
                     <v-btn class="ma-3">查看完整帖子</v-btn>
