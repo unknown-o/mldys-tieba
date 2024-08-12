@@ -1,9 +1,12 @@
 <template>
   <v-container style="max-width: 800px">
     <v-row dense style="margin: 0px 20px">
-      <h1 class="my-6 ml-1 justify text-primary">
-        {{ isSuccess ? postData.title : "迷路的牙刷" }}
-      </h1>
+      <router-link :to="{ path: '/' }">
+        <h1 class="text-primary" style="margin: 15px 0px">
+          <v-btn variant="text" icon="mdi-arrow-left"> </v-btn>
+          {{ isSuccess ? postData.title : "迷路的牙刷" }}
+        </h1>
+      </router-link>
     </v-row>
     <div v-if="loading.show" style="text-align: center; margin: 15vh">
       <v-progress-circular :size="50" color="amber" indeterminate></v-progress-circular>
