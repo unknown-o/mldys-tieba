@@ -11,6 +11,20 @@
           <v-card :elevation="isHovering ? 12 : 1" v-bind="props" class="mb-2">
             <v-card-text>
               <div class="ma-3 justify">
+                <h2>公告</h2>
+                <v-divider class="my-4 justify"></v-divider>
+                <p v-html="announcement"></p>
+              </div>
+            </v-card-text>
+            <v-card-actions v-if="!filter.realtime" class="justify-end">
+              <v-btn class="ma-3" @click="search">搜索</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-hover>
+        <v-hover v-slot="{ isHovering, props }">
+          <v-card :elevation="isHovering ? 12 : 1" v-bind="props" class="mb-2">
+            <v-card-text>
+              <div class="ma-3 justify">
                 <h2>搜索</h2>
                 <v-divider class="my-4 justify"></v-divider>
                 <v-select
@@ -122,6 +136,7 @@ let displayList = ref([]);
 let summaryData = [];
 let filteredList = [];
 let filteredTotal = ref(1);
+let announcement = ref("");
 
 watch(
   () => filter.page,
@@ -135,6 +150,15 @@ watch(filter, () => {
     search();
   }
 });
+
+fetch("https://static-1.llilii.cn/mldys/other-file/announcement")
+  .then((response) => response.text())
+  .then((data) => {
+    announcement.value = data;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const getSummaryData = () => {
   loading.message = "加载元数据中";
