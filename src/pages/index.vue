@@ -97,13 +97,9 @@
                 >
                 <v-card-text>{{ item.content }}</v-card-text>
                 <v-card-actions class="justify-end">
-                  <a
-                    style="color: black"
-                    :href="`#/post?id=${item.post_id}`"
-                    target="_blank"
-                  >
-                    <v-btn class="ma-3">查看完整帖子</v-btn>
-                  </a>
+                  <router-link :to="{ path: `/post/${item.post_id}` }"
+                    ><v-btn style="color: black">查看完整帖子</v-btn>
+                  </router-link>
                 </v-card-actions>
               </v-card>
             </v-hover>

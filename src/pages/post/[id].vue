@@ -71,10 +71,10 @@
             >
               <a
                 target="_blank"
-                :href="`https://static-1.llilii.cn/mldys/${route.query.id}/screenshot.png`"
+                :href="`https://static-1.llilii.cn/mldys/${postId}/screenshot.png`"
               >
                 <v-img
-                  v-bind:src="`https://static-1.llilii.cn/mldys/${route.query.id}/screenshot.png`"
+                  v-bind:src="`https://static-1.llilii.cn/mldys/${postId}/screenshot.png`"
                 >
                 </v-img>
               </a>
@@ -82,8 +82,8 @@
           </v-hover>
         </v-tabs-window-item>
         <v-tabs-window-item value="three" style="padding: 20px">
-          <a :href="`https://tieba.baidu.com/p/${route.query.id}`" target="_blank"
-            >https://tieba.baidu.com/p/{{ route.query.id }}</a
+          <a :href="`https://tieba.baidu.com/p/${postId}`" target="_blank"
+            >https://tieba.baidu.com/p/{{ postId }}</a
           >
         </v-tabs-window-item>
       </v-tabs-window>
@@ -94,6 +94,7 @@
 import { ref, reactive, watch } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
+const postId = route.params.id;
 let tab = ref("one");
 let loading = reactive({
   show: true,
@@ -109,7 +110,7 @@ let postData = ref({});
 const getPostData = () => {
   loading.message = "加载帖子中...";
   loading.show = true;
-  fetch(`https://static-1.llilii.cn/mldys/${route.query.id}/post-data.json`)
+  fetch(`https://static-1.llilii.cn/mldys/${postId}/post-data.json`)
     .then((response) => response.json())
     .then((data) => {
       loading.show = false;
