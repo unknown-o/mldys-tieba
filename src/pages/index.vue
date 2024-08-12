@@ -106,6 +106,7 @@
 <script setup>
 import { ref, reactive, watch } from "vue";
 
+const basePath = import.meta.env.VITE_APP_BASE_PATH;
 let filter = reactive({
   type: "用户昵称",
   keyword: "嘟嘟嘟",
@@ -137,7 +138,7 @@ watch(filter, () => {
   search();
 });
 
-fetch("https://static-1.llilii.cn/mldys/other-file/announcement")
+fetch(`${basePath}/other-file/announcement`)
   .then((response) => response.text())
   .then((data) => {
     announcement.value = data;
@@ -157,7 +158,7 @@ const readomData = () => {
 const getSummaryData = () => {
   loading.message = "加载元数据中";
   loading.show = true;
-  fetch("https://static-1.llilii.cn/mldys/summary.json")
+  fetch(`${basePath}/summary.json`)
     .then((response) => response.json())
     .then((data) => {
       loading.show = false;

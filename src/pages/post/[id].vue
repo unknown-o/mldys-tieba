@@ -74,10 +74,10 @@
             >
               <a
                 target="_blank"
-                :href="`https://static-1.llilii.cn/mldys/${postId}/screenshot.png`"
+                :href="`${basePath}/${postId}/screenshot.png`"
               >
                 <v-img
-                  v-bind:src="`https://static-1.llilii.cn/mldys/${postId}/screenshot.png`"
+                  v-bind:src="`${basePath}/${postId}/screenshot.png`"
                 >
                 </v-img>
               </a>
@@ -96,6 +96,8 @@
 <script setup>
 import { ref, reactive, watch } from "vue";
 import { useRoute } from "vue-router";
+
+const basePath = import.meta.env.VITE_APP_BASE_PATH;
 const route = useRoute();
 const postId = route.params.id;
 let tab = ref("one");
@@ -113,7 +115,7 @@ let postData = ref({});
 const getPostData = () => {
   loading.message = "加载帖子中...";
   loading.show = true;
-  fetch(`https://static-1.llilii.cn/mldys/${postId}/post-data.json`)
+  fetch(`${basePath}/${postId}/post-data.json`)
     .then((response) => response.json())
     .then((data) => {
       loading.show = false;
