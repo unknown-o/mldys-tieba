@@ -16,9 +16,6 @@
                 <p v-html="announcement"></p>
               </div>
             </v-card-text>
-            <v-card-actions v-if="!filter.realtime" class="justify-end">
-              <v-btn class="ma-3" @click="search">搜索</v-btn>
-            </v-card-actions>
           </v-card>
         </v-hover>
         <v-hover v-slot="{ isHovering, props }">
@@ -37,16 +34,12 @@
                   v-model="filter.keyword"
                   required
                 ></v-text-field>
-                <v-switch
-                  v-model="filter.realtime"
-                  color="#9932CC"
-                  label="实时搜索（可能会卡顿）"
-                ></v-switch>
+
+                <v-card-actions class="justify-end">
+                  <v-btn @click="readomData" variant="text">打乱帖子</v-btn>
+                </v-card-actions>
               </div>
             </v-card-text>
-            <v-card-actions v-if="!filter.realtime" class="justify-end">
-              <v-btn class="ma-3" @click="search">搜索</v-btn>
-            </v-card-actions>
           </v-card>
         </v-hover>
       </v-col>
@@ -116,7 +109,6 @@ import { ref, reactive, watch } from "vue";
 let filter = reactive({
   type: "用户昵称",
   keyword: "嘟嘟嘟",
-  realtime: true,
   page: 1,
   size: 10,
 });
@@ -142,9 +134,7 @@ watch(
 );
 
 watch(filter, () => {
-  if (filter.realtime) {
-    search();
-  }
+  search();
 });
 
 fetch("https://static-1.llilii.cn/mldys/other-file/announcement")
@@ -155,6 +145,14 @@ fetch("https://static-1.llilii.cn/mldys/other-file/announcement")
   .catch((err) => {
     console.log(err);
   });
+
+const readomData = () => {
+  for (let i = summaryData.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [summaryData[i], summaryData[j]] = [summaryData[j], summaryData[i]];
+  }
+  search();
+};
 
 const getSummaryData = () => {
   loading.message = "加载元数据中";
